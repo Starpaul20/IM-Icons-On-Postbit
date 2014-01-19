@@ -1,0 +1,6 @@
+1.0.1
+- Updated plugin with 1.6.5 plugin system updates
+- Optimization and general plugin updating
+
+1.0
+- Initial release
