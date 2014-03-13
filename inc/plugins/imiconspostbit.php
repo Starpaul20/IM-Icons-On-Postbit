@@ -18,7 +18,7 @@ if(my_strpos($_SERVER['PHP_SELF'], 'showthread.php'))
 	{
 		$templatelist .= ',';
 	}
-	$templatelist .= 'postbit_im';
+	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_aim,postbit_im_yahoo,postbit_im_msn';
 }
 
 // Tell MyBB when to run the hooks
@@ -55,6 +55,42 @@ function imiconspostbit_activate()
 	);
 	$db->insert_query("templates", $insert_array);
 
+	$insert_array = array(
+		'title'		=> 'postbit_im_icq',
+		'template'	=> $db->escape_string('<a href="javascript:MyBB.popupWindow(\'http://www.icq.com/people/{$post[\'icq\']}\', \'icqwindow\', \'650\', \'500\')"><img src="images/im/im_icq.png" alt="{$lang->icq}" title="{$send_via_icq}" /></a>&nbsp;'),
+		'sid'		=> '-1',
+		'version'	=> '',
+		'dateline'	=> TIME_NOW
+	);
+	$db->insert_query("templates", $insert_array);
+
+	$insert_array = array(
+		'title'		=> 'postbit_im_aim',
+		'template'	=> $db->escape_string('<a href="javascript:MyBB.popupWindow(\'misc.php?action=imcenter&imtype=aim&uid={$post[\'uid\']}\', \'imcenter\', \'450\', \'300\')"><img src="images/im/im_aim.png" alt="{$lang->aim}" title="{$send_via_aim}" /></a>&nbsp;'),
+		'sid'		=> '-1',
+		'version'	=> '',
+		'dateline'	=> TIME_NOW
+	);
+	$db->insert_query("templates", $insert_array);
+
+	$insert_array = array(
+		'title'		=> 'postbit_im_yahoo',
+		'template'	=> $db->escape_string('<a href="javascript:MyBB.popupWindow(\'misc.php?action=imcenter&imtype=yahoo&uid={$post[\'uid\']}\', \'imcenter\', \'450\', \'300\')"><img src="images/im/im_yahoo.png" alt="{$lang->yahoo}" title="{$send_via_yahoo}" /></a>&nbsp;'),
+		'sid'		=> '-1',
+		'version'	=> '',
+		'dateline'	=> TIME_NOW
+	);
+	$db->insert_query("templates", $insert_array);
+
+	$insert_array = array(
+		'title'		=> 'postbit_im_msn',
+		'template'	=> $db->escape_string('<a href="javascript:MyBB.popupWindow(\'misc.php?action=imcenter&imtype=msn&uid={$post[\'uid\']}\', \'imcenter\', \'450\', \'300\')"><img src="images/im/im_msn.png" alt="{$lang->msn}" title="{$send_via_msn}" /></a>'),
+		'sid'		=> '-1',
+		'version'	=> '',
+		'dateline'	=> TIME_NOW
+	);
+	$db->insert_query("templates", $insert_array);
+
 	include MYBB_ROOT."/inc/adminfunctions_templates.php";
 	find_replace_templatesets("postbit", "#".preg_quote('{$post[\'user_details\']}')."#i", '{$post[\'user_details\']}{$post[\'im\']}');
 	find_replace_templatesets("postbit_classic", "#".preg_quote('{$post[\'user_details\']}')."#i", '{$post[\'user_details\']}{$post[\'im\']}');
@@ -64,7 +100,7 @@ function imiconspostbit_activate()
 function imiconspostbit_deactivate()
 {
 	global $db;
-	$db->delete_query("templates", "title IN('postbit_im')");
+	$db->delete_query("templates", "title IN('postbit_im','postbit_im_icq','postbit_im_aim','postbit_im_yahoo','postbit_im_msn')");
 
 	include MYBB_ROOT."/inc/adminfunctions_templates.php";
 	find_replace_templatesets("postbit", "#".preg_quote('{$post[\'im\']}')."#i", '', 0);
@@ -77,53 +113,39 @@ function imiconspostbit_run($post)
 	global $db, $mybb, $lang, $templates;
 	$lang->load("imiconspostbit");
 
+	$post['im'] = "";
 	if($mybb->usergroup['canviewprofiles'] != 0)
 	{
+		$post['im_icq'] = "";
 		if($post['icq'])
 		{
+			$post['icq'] = intval($post['icq']);
 			$send_via_icq = $lang->sprintf($lang->send_via_icq, $post['username']);
-			$post['im_icq'] = "<a href=\"javascript:MyBB.popupWindow('http://www.icq.com/people/{$post['icq']}', 'icqwindow', '650', '500')\"><img src=\"images/im/im_icq.png\" alt=\"{$lang->icq}\" title=\"{$send_via_icq}\" /></a>&nbsp;"; 
-		}
-		else
-		{	
-			$post['im_icq'] == "";	
+			eval("\$post['im_icq'] = \"".$templates->get("postbit_im_icq")."\";");
 		}
 
+		$post['im_aim'] = "";
 		if($post['aim'])
 		{
 			$send_via_aim = $lang->sprintf($lang->send_via_aim, $post['username']);
-			$post['im_aim'] = "<a href=\"javascript:MyBB.popupWindow('misc.php?action=imcenter&imtype=aim&uid={$post['uid']}', 'imcenter', '450', '300')\"><img src=\"images/im/im_aim.png\" alt=\"{$lang->aim}\" title=\"{$send_via_aim}\" /></a>&nbsp;"; 
-		}
-		else
-		{	
-			$post['im_aim'] == "";	
+			eval("\$post['im_aim'] = \"".$templates->get("postbit_im_aim")."\";");
 		}
 
+		$post['im_yahoo'] = "";
 		if($post['yahoo'])
 		{
 			$send_via_yahoo = $lang->sprintf($lang->send_via_yahoo, $post['username']);
-			$post['im_yahoo'] = "<a href=\"javascript:MyBB.popupWindow('misc.php?action=imcenter&imtype=yahoo&uid={$post['uid']}', 'imcenter', '450', '300')\"><img src=\"images/im/im_yahoo.png\" alt=\"{$lang->yahoo}\" title=\"{$send_via_yahoo}\" /></a>&nbsp;";
-		}
-		else
-		{	
-			$post['im_yahoo'] == "";	
+			eval("\$post['im_yahoo'] = \"".$templates->get("postbit_im_yahoo")."\";");
 		}
 
+		$post['im_msn'] = "";
 		if($post['msn'])
 		{
 			$send_via_msn = $lang->sprintf($lang->send_via_msn, $post['username']);
-			$post['im_msn'] = "<a href=\"javascript:MyBB.popupWindow('misc.php?action=imcenter&imtype=msn&uid={$post['uid']}', 'imcenter', '450', '300')\"><img src=\"images/im/im_msn.png\" alt=\"{$lang->msn}\" title=\"{$send_via_msn}\" /></a>";
-		}
-		else
-		{	
-			$post['im_msn'] == "";	
+			eval("\$post['im_msn'] = \"".$templates->get("postbit_im_msn")."\";");
 		}
 
 		eval("\$post['im'] = \"".$templates->get("postbit_im")."\";");
-	}
-	else
-	{
-		$post['im'] = "";
 	}
 
 	return $post;
