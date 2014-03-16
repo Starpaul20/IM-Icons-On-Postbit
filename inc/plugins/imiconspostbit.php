@@ -21,6 +21,26 @@ if(my_strpos($_SERVER['PHP_SELF'], 'showthread.php'))
 	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_aim,postbit_im_yahoo,postbit_im_msn';
 }
 
+if(my_strpos($_SERVER['PHP_SELF'], 'private.php'))
+{
+	global $templatelist;
+	if(isset($templatelist))
+	{
+		$templatelist .= ',';
+	}
+	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_aim,postbit_im_yahoo,postbit_im_msn';
+}
+
+if(my_strpos($_SERVER['PHP_SELF'], 'announcements.php'))
+{
+	global $templatelist;
+	if(isset($templatelist))
+	{
+		$templatelist .= ',';
+	}
+	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_aim,postbit_im_yahoo,postbit_im_msn';
+}
+
 // Tell MyBB when to run the hooks
 $plugins->add_hook("postbit", "imiconspostbit_run");
 $plugins->add_hook("postbit_pm", "imiconspostbit_run");
