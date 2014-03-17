@@ -1,3 +1,7 @@
+1.1
+- Moved hardcoded HTML to templates
+- Cached templates on PMs and Announcements
+
 1.0.1
 - Updated plugin with 1.6.5 plugin system updates
 - Optimization and general plugin updating

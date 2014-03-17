@@ -1,6 +1,6 @@
 ## INFORMATION ##
 
-IM Icons On Postbits (1.0.1) for MyBB 1.6
+IM Icons On Postbits (1.1) for MyBB 1.6
 Created by: Starpaul20
 Copyright: ©2011
 License: GPL
@@ -22,4 +22,4 @@ This plugin offers full language support.
 
 ## UPDATING ##
 
-If you're updating from any previous version, you only need to overwrite old files with the new ones, no need to deactivate.
+If you're updating from any previous version, you must first deactivate the plugin, upload all new files and reactivate.
