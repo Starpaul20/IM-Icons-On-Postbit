@@ -18,7 +18,7 @@ if(my_strpos($_SERVER['PHP_SELF'], 'showthread.php'))
 	{
 		$templatelist .= ',';
 	}
-	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_aim,postbit_im_yahoo,postbit_im_msn';
+	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_aim,postbit_im_yahoo,postbit_im_skype,postbit_im_google';
 }
 
 if(my_strpos($_SERVER['PHP_SELF'], 'private.php'))
@@ -28,7 +28,7 @@ if(my_strpos($_SERVER['PHP_SELF'], 'private.php'))
 	{
 		$templatelist .= ',';
 	}
-	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_aim,postbit_im_yahoo,postbit_im_msn';
+	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_aim,postbit_im_yahoo,postbit_im_skype,postbit_im_google';
 }
 
 if(my_strpos($_SERVER['PHP_SELF'], 'announcements.php'))
@@ -38,7 +38,7 @@ if(my_strpos($_SERVER['PHP_SELF'], 'announcements.php'))
 	{
 		$templatelist .= ',';
 	}
-	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_aim,postbit_im_yahoo,postbit_im_msn';
+	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_aim,postbit_im_yahoo,postbit_im_skype,postbit_im_google';
 }
 
 // Tell MyBB when to run the hooks
@@ -70,7 +70,7 @@ function imiconspostbit_activate()
 	global $db;
 	$insert_array = array(
 		'title'		=> 'postbit_im',
-		'template'	=> $db->escape_string('<br />{$post[\'im_icq\']}{$post[\'im_aim\']}{$post[\'im_yahoo\']}{$post[\'im_msn\']}'),
+		'template'	=> $db->escape_string('<br />{$post[\'im_icq\']}{$post[\'im_aim\']}{$post[\'im_yahoo\']}{$post[\'im_skype\']}{$post[\'im_google\']}'),
 		'sid'		=> '-1',
 		'version'	=> '',
 		'dateline'	=> TIME_NOW
@@ -105,8 +105,17 @@ function imiconspostbit_activate()
 	$db->insert_query("templates", $insert_array);
 
 	$insert_array = array(
-		'title'		=> 'postbit_im_msn',
-		'template'	=> $db->escape_string('<a href="javascript:MyBB.popupWindow(\'misc.php?action=imcenter&imtype=msn&uid={$post[\'uid\']}\', \'imcenter\', \'450\', \'300\')"><img src="images/im/im_msn.png" alt="{$lang->msn}" title="{$send_via_msn}" /></a>'),
+		'title'		=> 'postbit_im_skype',
+		'template'	=> $db->escape_string('<a href="javascript:MyBB.popupWindow(\'misc.php?action=imcenter&imtype=skype&uid={$post[\'uid\']}\', \'imcenter\', \'450\', \'300\')"><img src="images/im/im_skype.png" alt="{$lang->skype}" title="{$send_via_skype}" /></a>&nbsp;'),
+		'sid'		=> '-1',
+		'version'	=> '',
+		'dateline'	=> TIME_NOW
+	);
+	$db->insert_query("templates", $insert_array);
+
+	$insert_array = array(
+		'title'		=> 'postbit_im_google',
+		'template'	=> $db->escape_string('<a href="{$post[\'profilelink_plain\']}" target="_blank"><img src="images/im/im_google.png" alt="{$lang->google}" title="{$send_via_google}" /></a>'),
 		'sid'		=> '-1',
 		'version'	=> '',
 		'dateline'	=> TIME_NOW
@@ -122,7 +131,7 @@ function imiconspostbit_activate()
 function imiconspostbit_deactivate()
 {
 	global $db;
-	$db->delete_query("templates", "title IN('postbit_im','postbit_im_icq','postbit_im_aim','postbit_im_yahoo','postbit_im_msn')");
+	$db->delete_query("templates", "title IN('postbit_im','postbit_im_icq','postbit_im_aim','postbit_im_yahoo','postbit_im_skype','postbit_im_google')");
 
 	include MYBB_ROOT."/inc/adminfunctions_templates.php";
 	find_replace_templatesets("postbit", "#".preg_quote('{$post[\'im\']}')."#i", '', 0);
@@ -160,11 +169,18 @@ function imiconspostbit_run($post)
 			eval("\$post['im_yahoo'] = \"".$templates->get("postbit_im_yahoo")."\";");
 		}
 
-		$post['im_msn'] = "";
-		if($post['msn'])
+		$post['im_skype'] = "";
+		if($post['skype'])
 		{
-			$send_via_msn = $lang->sprintf($lang->send_via_msn, $post['username']);
-			eval("\$post['im_msn'] = \"".$templates->get("postbit_im_msn")."\";");
+			$send_via_skype = $lang->sprintf($lang->send_via_skype, $post['username']);
+			eval("\$post['im_skype'] = \"".$templates->get("postbit_im_skype")."\";");
+		}
+
+		$post['im_google'] = "";
+		if($post['google'])
+		{
+			$send_via_google = $lang->sprintf($lang->send_via_google, $post['username']);
+			eval("\$post['im_google'] = \"".$templates->get("postbit_im_google")."\";");
 		}
 
 		eval("\$post['im'] = \"".$templates->get("postbit_im")."\";");
