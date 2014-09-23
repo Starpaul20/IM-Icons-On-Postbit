@@ -56,9 +56,8 @@ function imiconspostbit_info()
 		"website"			=> "http://galaxiesrealm.com/index.php",
 		"author"			=> "Starpaul20",
 		"authorsite"		=> "http://galaxiesrealm.com/index.php",
-		"version"			=> "1.1",
-		"guid"				=> "085c4b899611342ec32f40d98ddaca8f",
-		"compatibility"		=> "16*"
+		"version"			=> "1.0",
+		"compatibility"		=> "18*"
 	);
 }
 
