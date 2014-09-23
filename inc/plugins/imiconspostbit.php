@@ -50,9 +50,12 @@ $plugins->add_hook("postbit_prev", "imiconspostbit_run");
 // The information that shows up on the plugin manager
 function imiconspostbit_info()
 {
+	global $lang;
+	$lang->load("imiconspostbit", true);
+
 	return array(
-		"name"				=> "IM Icons on Postbit",
-		"description"		=> "Adds instant messaging icons on the postbit.",
+		"name"				=> $lang->imiconspostbit_info_name,
+		"description"		=> $lang->imiconspostbit_info_desc,
 		"website"			=> "http://galaxiesrealm.com/index.php",
 		"author"			=> "Starpaul20",
 		"authorsite"		=> "http://galaxiesrealm.com/index.php",
