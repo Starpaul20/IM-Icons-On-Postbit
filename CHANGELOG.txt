@@ -4,13 +4,13 @@
 
 ## Version number reset for MyBB 1.8 ##
 
-1.1
+1.1 (March 17th, 2014)
 - Moved hardcoded HTML to templates
 - Cached templates on PMs and Announcements
 
-1.0.1
+1.0.1 (November 25th, 2011)
 - Updated plugin with 1.6.5 plugin system updates
 - Optimization and general plugin updating
 
-1.0
+1.0 (April 10th, 2011)
 - Initial release
