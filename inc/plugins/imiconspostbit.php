@@ -184,7 +184,10 @@ function imiconspostbit_run($post)
 			eval("\$post['im_google'] = \"".$templates->get("postbit_im_google")."\";");
 		}
 
-		eval("\$post['im'] = \"".$templates->get("postbit_im")."\";");
+		if(!empty($post['im_icq']) || !empty($post['im_aim']) || !empty($post['im_yahoo']) || !empty($post['im_skype']) || !empty($post['im_google']))
+		{
+			eval("\$post['im'] = \"".$templates->get("postbit_im")."\";");
+		}
 	}
 
 	return $post;
