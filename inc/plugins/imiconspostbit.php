@@ -148,7 +148,7 @@ function imiconspostbit_run($post)
 	$post['im'] = '';
 	if($mybb->usergroup['canviewprofiles'] != 0)
 	{
-		$post['im_icq'] = '';
+		$post['im_icq'] = $send_via_icq = '';
 		if(!empty($post['icq']))
 		{
 			$post['icq'] = (int)$post['icq'];
@@ -156,28 +156,28 @@ function imiconspostbit_run($post)
 			eval("\$post['im_icq'] = \"".$templates->get("postbit_im_icq")."\";");
 		}
 
-		$post['im_aim'] = '';
+		$post['im_aim'] = $send_via_aim = '';
 		if(!empty($post['aim']))
 		{
 			$send_via_aim = $lang->sprintf($lang->send_via_aim, $post['username']);
 			eval("\$post['im_aim'] = \"".$templates->get("postbit_im_aim")."\";");
 		}
 
-		$post['im_yahoo'] = '';
+		$post['im_yahoo'] = $send_via_yahoo = '';
 		if(!empty($post['yahoo']))
 		{
 			$send_via_yahoo = $lang->sprintf($lang->send_via_yahoo, $post['username']);
 			eval("\$post['im_yahoo'] = \"".$templates->get("postbit_im_yahoo")."\";");
 		}
 
-		$post['im_skype'] = '';
+		$post['im_skype'] = $send_via_skype = '';
 		if(!empty($post['skype']))
 		{
 			$send_via_skype = $lang->sprintf($lang->send_via_skype, $post['username']);
 			eval("\$post['im_skype'] = \"".$templates->get("postbit_im_skype")."\";");
 		}
 
-		$post['im_google'] = '';
+		$post['im_google'] = $send_via_google = '';
 		if(!empty($post['google']))
 		{
 			$send_via_google = $lang->sprintf($lang->send_via_google, $post['username']);
