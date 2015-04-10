@@ -151,7 +151,7 @@ function imiconspostbit_run($post)
 		$post['im_icq'] = "";
 		if($post['icq'])
 		{
-			$post['icq'] = intval($post['icq']);
+			$post['icq'] = (int)$post['icq'];
 			$send_via_icq = $lang->sprintf($lang->send_via_icq, $post['username']);
 			eval("\$post['im_icq'] = \"".$templates->get("postbit_im_icq")."\";");
 		}
