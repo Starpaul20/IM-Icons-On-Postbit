@@ -192,5 +192,3 @@ function imiconspostbit_run($post)
 
 	return $post;
 }
-
-?>

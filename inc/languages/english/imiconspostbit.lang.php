@@ -18,5 +18,3 @@ $l['icq'] = "ICQ";
 $l['yahoo'] = "Yahoo";
 $l['skype'] = "Skype";
 $l['google'] = "Google Talk";
-
-?>
