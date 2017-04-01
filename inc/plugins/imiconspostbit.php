@@ -11,7 +11,7 @@ if(!defined("IN_MYBB"))
 }
 
 // Neat trick for caching our custom template(s)
-if(my_strpos($_SERVER['PHP_SELF'], 'showthread.php'))
+if(THIS_SCRIPT == 'showthread.php')
 {
 	global $templatelist;
 	if(isset($templatelist))
@@ -21,7 +21,7 @@ if(my_strpos($_SERVER['PHP_SELF'], 'showthread.php'))
 	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_aim,postbit_im_yahoo,postbit_im_skype,postbit_im_google';
 }
 
-if(my_strpos($_SERVER['PHP_SELF'], 'private.php'))
+if(THIS_SCRIPT == 'private.php')
 {
 	global $templatelist;
 	if(isset($templatelist))
@@ -31,7 +31,7 @@ if(my_strpos($_SERVER['PHP_SELF'], 'private.php'))
 	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_aim,postbit_im_yahoo,postbit_im_skype,postbit_im_google';
 }
 
-if(my_strpos($_SERVER['PHP_SELF'], 'announcements.php'))
+if(THIS_SCRIPT == 'announcements.php')
 {
 	global $templatelist;
 	if(isset($templatelist))
