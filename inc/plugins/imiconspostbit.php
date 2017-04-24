@@ -41,6 +41,36 @@ if(THIS_SCRIPT == 'announcements.php')
 	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_aim,postbit_im_yahoo,postbit_im_skype,postbit_im_google';
 }
 
+if(THIS_SCRIPT == 'newthread.php')
+{
+	global $templatelist;
+	if(isset($templatelist))
+	{
+		$templatelist .= ',';
+	}
+	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_aim,postbit_im_yahoo,postbit_im_skype,postbit_im_google';
+}
+
+if(THIS_SCRIPT == 'newreply.php')
+{
+	global $templatelist;
+	if(isset($templatelist))
+	{
+		$templatelist .= ',';
+	}
+	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_aim,postbit_im_yahoo,postbit_im_skype,postbit_im_google';
+}
+
+if(THIS_SCRIPT == 'editpost.php')
+{
+	global $templatelist;
+	if(isset($templatelist))
+	{
+		$templatelist .= ',';
+	}
+	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_aim,postbit_im_yahoo,postbit_im_skype,postbit_im_google';
+}
+
 // Tell MyBB when to run the hooks
 $plugins->add_hook("postbit", "imiconspostbit_run");
 $plugins->add_hook("postbit_pm", "imiconspostbit_run");
