@@ -89,7 +89,7 @@ function imiconspostbit_activate()
 
 	$insert_array = array(
 		'title'		=> 'postbit_im_aim',
-		'template'	=> $db->escape_string('<a href="javascript:;" onclick="MyBB.popupWindow(\'/misc.php?action=imcenter&amp;imtype=aim&amp;uid={$post[\'uid\']}\'); return false;"><img src="images/im/im_aim.png" alt="{$lang->aim}" title="{$send_via_aim}" /></a>&nbsp;'),
+		'template'	=> $db->escape_string('<a href="javascript:void(0)" onclick="MyBB.popupWindow(\'/misc.php?action=imcenter&amp;imtype=aim&amp;uid={$post[\'uid\']}\'); return false;"><img src="images/im/im_aim.png" alt="{$lang->aim}" title="{$send_via_aim}" /></a>&nbsp;'),
 		'sid'		=> '-1',
 		'version'	=> '',
 		'dateline'	=> TIME_NOW
@@ -98,7 +98,7 @@ function imiconspostbit_activate()
 
 	$insert_array = array(
 		'title'		=> 'postbit_im_yahoo',
-		'template'	=> $db->escape_string('<a href="javascript:;" onclick="MyBB.popupWindow(\'/misc.php?action=imcenter&amp;imtype=yahoo&uid={$post[\'uid\']}\'); return false;"><img src="images/im/im_yahoo.png" alt="{$lang->yahoo}" title="{$send_via_yahoo}" /></a>&nbsp;'),
+		'template'	=> $db->escape_string('<a href="javascript:void(0)" onclick="MyBB.popupWindow(\'/misc.php?action=imcenter&amp;imtype=yahoo&uid={$post[\'uid\']}\'); return false;"><img src="images/im/im_yahoo.png" alt="{$lang->yahoo}" title="{$send_via_yahoo}" /></a>&nbsp;'),
 		'sid'		=> '-1',
 		'version'	=> '',
 		'dateline'	=> TIME_NOW
@@ -107,7 +107,7 @@ function imiconspostbit_activate()
 
 	$insert_array = array(
 		'title'		=> 'postbit_im_skype',
-		'template'	=> $db->escape_string('<a href="javascript:;" onclick="MyBB.popupWindow(\'/misc.php?action=imcenter&amp;imtype=skype&uid={$post[\'uid\']}\'); return false;"><img src="images/im/im_skype.png" alt="{$lang->skype}" title="{$send_via_skype}" /></a>&nbsp;'),
+		'template'	=> $db->escape_string('<a href="javascript:void(0)" onclick="MyBB.popupWindow(\'/misc.php?action=imcenter&amp;imtype=skype&uid={$post[\'uid\']}\'); return false;"><img src="images/im/im_skype.png" alt="{$lang->skype}" title="{$send_via_skype}" /></a>&nbsp;'),
 		'sid'		=> '-1',
 		'version'	=> '',
 		'dateline'	=> TIME_NOW
