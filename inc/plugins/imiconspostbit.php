@@ -172,14 +172,14 @@ function imiconspostbit_deactivate()
 // Add IM Icons on Postbit
 function imiconspostbit_run($post)
 {
-	global $db, $mybb, $lang, $templates;
+	global $db, $mybb, $lang, $templates, $usergroup;
 	$lang->load("imiconspostbit");
 
 	$post['im'] = '';
 	if($mybb->usergroup['canviewprofiles'] != 0)
 	{
 		$post['im_icq'] = $send_via_icq = '';
-		if(!empty($post['icq']))
+		if(!empty($post['icq']) && is_member($mybb->settings['allowicqfield'], array('usergroup' => $usergroup['usergroup'], 'additionalgroups' => $usergroup['additionalgroups'])))
 		{
 			$post['icq'] = (int)$post['icq'];
 			$send_via_icq = $lang->sprintf($lang->send_via_icq, $post['username']);
@@ -187,28 +187,28 @@ function imiconspostbit_run($post)
 		}
 
 		$post['im_aim'] = $send_via_aim = '';
-		if(!empty($post['aim']))
+		if(!empty($post['aim']) && is_member($mybb->settings['allowaimfield'], array('usergroup' => $usergroup['usergroup'], 'additionalgroups' => $usergroup['additionalgroups'])))
 		{
 			$send_via_aim = $lang->sprintf($lang->send_via_aim, $post['username']);
 			eval("\$post['im_aim'] = \"".$templates->get("postbit_im_aim")."\";");
 		}
 
 		$post['im_yahoo'] = $send_via_yahoo = '';
-		if(!empty($post['yahoo']))
+		if(!empty($post['yahoo']) && is_member($mybb->settings['allowyahoofield'], array('usergroup' => $usergroup['usergroup'], 'additionalgroups' => $usergroup['additionalgroups'])))
 		{
 			$send_via_yahoo = $lang->sprintf($lang->send_via_yahoo, $post['username']);
 			eval("\$post['im_yahoo'] = \"".$templates->get("postbit_im_yahoo")."\";");
 		}
 
 		$post['im_skype'] = $send_via_skype = '';
-		if(!empty($post['skype']))
+		if(!empty($post['skype']) && is_member($mybb->settings['allowskypefield'], array('usergroup' => $usergroup['usergroup'], 'additionalgroups' => $usergroup['additionalgroups'])))
 		{
 			$send_via_skype = $lang->sprintf($lang->send_via_skype, $post['username']);
 			eval("\$post['im_skype'] = \"".$templates->get("postbit_im_skype")."\";");
 		}
 
 		$post['im_google'] = $send_via_google = '';
-		if(!empty($post['google']))
+		if(!empty($post['google']) && is_member($mybb->settings['allowgooglefield'], array('usergroup' => $usergroup['usergroup'], 'additionalgroups' => $usergroup['additionalgroups'])))
 		{
 			$send_via_google = $lang->sprintf($lang->send_via_google, $post['username']);
 			eval("\$post['im_google'] = \"".$templates->get("postbit_im_google")."\";");
