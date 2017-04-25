@@ -5,7 +5,7 @@ Created by: Starpaul20
 Copyright: ©2011
 License: GPL
 
-Adds instant messaging icons to the postbit. The icons can be clicked on to bring up a pop-up containing the IM contact of that user (ICQ's opens a link to that user's ICQ.com profile and Google Talk just links to that person's profile).
+Adds instant messaging icons to the postbit. The icons can be clicked on to bring up a pop-up containing the IM contact of that user (ICQ's opens a link to that user's ICQ.com profile and Google Hangouts just links to that person's profile).
 
 Icons will only display if the field in question is filled in and the user has permission to view profiles.
 
