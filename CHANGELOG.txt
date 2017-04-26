@@ -1,3 +1,14 @@
+1.1 (April 26th, 2017)
+- Optimized PNG images
+- Removed PHP closing tags
+- Use THIS_SCRIPT for template caching
+- Updated javascript links
+- Cached templates in all postbit areas
+- Updated Google Talk to Google Hangouts
+- Added permission check
+- Updated templates
+- Dropped useless global
+
 1.0.1 (April 10th, 2015)
 - Typecast conversion
 - Declared variables cleanup
