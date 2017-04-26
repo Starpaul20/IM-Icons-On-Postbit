@@ -172,7 +172,7 @@ function imiconspostbit_deactivate()
 // Add IM Icons on Postbit
 function imiconspostbit_run($post)
 {
-	global $db, $mybb, $lang, $templates;
+	global $mybb, $lang, $templates;
 	$lang->load("imiconspostbit");
 
 	$post['im'] = '';
