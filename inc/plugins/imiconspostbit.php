@@ -1,6 +1,6 @@
 <?php
 /**
- * IM icons on Postbit
+ * IM Icons on Postbit
  * Copyright 2011 Starpaul20
  */
 
