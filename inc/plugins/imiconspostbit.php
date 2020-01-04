@@ -18,7 +18,7 @@ if(THIS_SCRIPT == 'showthread.php')
 	{
 		$templatelist .= ',';
 	}
-	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_yahoo,postbit_im_skype,postbit_im_google';
+	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_skype,postbit_im_google';
 }
 
 if(THIS_SCRIPT == 'private.php')
@@ -28,7 +28,7 @@ if(THIS_SCRIPT == 'private.php')
 	{
 		$templatelist .= ',';
 	}
-	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_yahoo,postbit_im_skype,postbit_im_google';
+	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_skype,postbit_im_google';
 }
 
 if(THIS_SCRIPT == 'announcements.php')
@@ -38,7 +38,7 @@ if(THIS_SCRIPT == 'announcements.php')
 	{
 		$templatelist .= ',';
 	}
-	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_yahoo,postbit_im_skype,postbit_im_google';
+	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_skype,postbit_im_google';
 }
 
 if(THIS_SCRIPT == 'newthread.php')
@@ -48,7 +48,7 @@ if(THIS_SCRIPT == 'newthread.php')
 	{
 		$templatelist .= ',';
 	}
-	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_yahoo,postbit_im_skype,postbit_im_google';
+	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_skype,postbit_im_google';
 }
 
 if(THIS_SCRIPT == 'newreply.php')
@@ -58,7 +58,7 @@ if(THIS_SCRIPT == 'newreply.php')
 	{
 		$templatelist .= ',';
 	}
-	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_yahoo,postbit_im_skype,postbit_im_google';
+	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_skype,postbit_im_google';
 }
 
 if(THIS_SCRIPT == 'editpost.php')
@@ -68,7 +68,7 @@ if(THIS_SCRIPT == 'editpost.php')
 	{
 		$templatelist .= ',';
 	}
-	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_yahoo,postbit_im_skype,postbit_im_google';
+	$templatelist .= 'postbit_im,postbit_im_icq,postbit_im_skype,postbit_im_google';
 }
 
 // Tell MyBB when to run the hooks
@@ -101,7 +101,7 @@ function imiconspostbit_activate()
 	global $db;
 	$insert_array = array(
 		'title'		=> 'postbit_im',
-		'template'	=> $db->escape_string('<br />{$post[\'im_icq\']}{$post[\'im_yahoo\']}{$post[\'im_skype\']}{$post[\'im_google\']}'),
+		'template'	=> $db->escape_string('<br />{$post[\'im_icq\']}{$post[\'im_skype\']}{$post[\'im_google\']}'),
 		'sid'		=> '-1',
 		'version'	=> '',
 		'dateline'	=> TIME_NOW
@@ -111,15 +111,6 @@ function imiconspostbit_activate()
 	$insert_array = array(
 		'title'		=> 'postbit_im_icq',
 		'template'	=> $db->escape_string('<a href="https://www.icq.com/people/{$post[\'icq\']}" target="_blank"><img src="images/im/im_icq.png" alt="{$lang->icq}" title="{$send_via_icq}" /></a>&nbsp;'),
-		'sid'		=> '-1',
-		'version'	=> '',
-		'dateline'	=> TIME_NOW
-	);
-	$db->insert_query("templates", $insert_array);
-
-	$insert_array = array(
-		'title'		=> 'postbit_im_yahoo',
-		'template'	=> $db->escape_string('<a href="javascript:void(0)" onclick="MyBB.popupWindow(\'/misc.php?action=imcenter&amp;imtype=yahoo&amp;uid={$post[\'uid\']}\'); return false;"><img src="images/im/im_yahoo.png" alt="{$lang->yahoo}" title="{$send_via_yahoo}" /></a>&nbsp;'),
 		'sid'		=> '-1',
 		'version'	=> '',
 		'dateline'	=> TIME_NOW
@@ -153,7 +144,7 @@ function imiconspostbit_activate()
 function imiconspostbit_deactivate()
 {
 	global $db;
-	$db->delete_query("templates", "title IN('postbit_im','postbit_im_icq','postbit_im_yahoo','postbit_im_skype','postbit_im_google')");
+	$db->delete_query("templates", "title IN('postbit_im','postbit_im_icq','postbit_im_skype','postbit_im_google')");
 
 	include MYBB_ROOT."/inc/adminfunctions_templates.php";
 	find_replace_templatesets("postbit", "#".preg_quote('{$post[\'im\']}')."#i", '', 0);
@@ -177,13 +168,6 @@ function imiconspostbit_run($post)
 			eval("\$post['im_icq'] = \"".$templates->get("postbit_im_icq")."\";");
 		}
 
-		$post['im_yahoo'] = $send_via_yahoo = '';
-		if(!empty($post['yahoo']) && is_member($mybb->settings['allowyahoofield'], array('usergroup' => $post['usergroup'], 'additionalgroups' => $post['additionalgroups'])))
-		{
-			$send_via_yahoo = $lang->sprintf($lang->send_via_yahoo, $post['username']);
-			eval("\$post['im_yahoo'] = \"".$templates->get("postbit_im_yahoo")."\";");
-		}
-
 		$post['im_skype'] = $send_via_skype = '';
 		if(!empty($post['skype']) && is_member($mybb->settings['allowskypefield'], array('usergroup' => $post['usergroup'], 'additionalgroups' => $post['additionalgroups'])))
 		{
@@ -198,7 +182,7 @@ function imiconspostbit_run($post)
 			eval("\$post['im_google'] = \"".$templates->get("postbit_im_google")."\";");
 		}
 
-		if(!empty($post['im_icq']) || !empty($post['im_yahoo']) || !empty($post['im_skype']) || !empty($post['im_google']))
+		if(!empty($post['im_icq']) || !empty($post['im_skype']) || !empty($post['im_google']))
 		{
 			eval("\$post['im'] = \"".$templates->get("postbit_im")."\";");
 		}
