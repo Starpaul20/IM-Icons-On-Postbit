@@ -122,7 +122,7 @@ function imiconspostbit_activate()
 
 	$insert_array = array(
 		'title'		=> 'postbit_im_skype',
-		'template'	=> $db->escape_string('<a href="javascript:void(0)" onclick="MyBB.popupWindow(\'/misc.php?action=imcenter&amp;imtype=skype&amp;uid={$post[\'uid\']}\'); return false;"><img src="images/im/im_skype.png" alt="{$lang->skype}" title="{$send_via_skype}" /></a>&nbsp;'),
+		'template'	=> $db->escape_string('<a href="{$post[\'profilelink_plain\']}" target="_blank"><img src="images/im/im_skype.png" alt="{$lang->skype}" title="{$send_via_skype}" /></a>&nbsp;'),
 		'sid'		=> '-1',
 		'version'	=> '',
 		'dateline'	=> TIME_NOW
